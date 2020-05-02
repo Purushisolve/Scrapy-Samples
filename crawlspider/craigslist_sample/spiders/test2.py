@@ -1,7 +1,10 @@
-from scrapy.contrib.spiders import CrawlSpider, Rule
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+import scrapy 
+
 from scrapy.selector import HtmlXPathSelector
-from craigslist_sample.items import CraigslistSampleItem
+
+from scrapy.spiders.crawl import Rule
+from scrapy.linkextractors.sgml import SgmlLinkExtractor
+
 
 
 class MySpider(CrawlSpider):
@@ -18,7 +21,7 @@ class MySpider(CrawlSpider):
         titles = hxs.xpath('//span[@class="pl"]')
         items = []
         for title in titles:
-            item = CraigslistSampleItem()
+            item = items.CraigslistSampleItem()
             item["title"] = title.select('a/span[@id="titletextonly"]/text()').extract()
             item["link"] = title.xpath("a/@href").extract()
             items.append(item)
